@@ -44,16 +44,12 @@ def how_much_same(mas_a, mas_b):
     return k
 
 
+def get_arr(lenght):
+    a = []
+    for i in range(lenght):
+        a.append(int(input()))
+    return a
 
 
 if __name__ == "__main__":
-    a = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-    print(rot90(a))
-    print(rot270(a))
-    x = [1, 2, 3]
-    y = [3, 2, 1]
-    print(big_sum(x, y))
-    print(321 + 123)
-    print(big_diff(y, x))
-    print(321 - 123)
-    print(how_much_same(x,y))
+    print(get_arr(3))
