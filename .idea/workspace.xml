@@ -42,11 +42,14 @@
       <option name="presentableId" value="Default" />
       <updated>1730993752630</updated>
       <workItem from="1730993759685" duration="38000" />
-      <workItem from="1730993806050" duration="762000" />
+      <workItem from="1730993806050" duration="1941000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/9_11$main.coverage" NAME="main Coverage Results" MODIFIED="1730995146583" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
