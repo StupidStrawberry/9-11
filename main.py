@@ -1,5 +1,4 @@
-import math
-
+import random
 
 def rot90(matrix):
     return [list(reversed(col)) for col in zip(*matrix)]
@@ -51,5 +50,11 @@ def get_arr(lenght):
     return a
 
 
+def gen_arr(lenght):
+    a = []
+    for i in range(lenght):
+        a.append(random.randint(0, 9))
+    return a
+
 if __name__ == "__main__":
-    print(get_arr(3))
+    print(gen_arr(3))
