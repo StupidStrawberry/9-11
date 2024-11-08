@@ -1,3 +1,9 @@
+import random
+from concurrent.futures import ThreadPoolExecutor
+import time
+
+
+
 def rot90(matrix):
     """
     Поворачивает матрицу на 90 градусов против часовой стрелки.
@@ -15,6 +21,7 @@ def rot270(matrix):
     :param matrix: Исходная матрица.
     :return: Повернутая матрица.
     """
+
     return [list(row) for row in list(zip(*matrix))[::-1]]
 
 
@@ -103,6 +110,7 @@ def gen_arr(lenght):
     a = []
     for i in range(lenght):
         a.append(random.randint(0, 9))
+    time.sleep(random.randint(1, 10))
     return a
 
 
@@ -155,7 +163,21 @@ def gen_or_get_mas():
     elif ch == 'n':
         print("Введите длинну массива")
         lenght = int(input())
-        return gen_arr(lenght)
+        with ThreadPoolExecutor() as executor:
+            a = executor.submit(gen_arr, lenght).result()
+            b = executor.submit(gen_arr, lenght).result()
+            c = executor.submit(gen_arr, lenght).result()
+            print("Матрица a " , a)
+            print("Матрица b " , b)
+            print("Матрица c " , c)
+            print("Вывберите понравившуюся матрицу a, b или c")
+            char = input()
+            if char == 'a':
+                return a
+            if char == 'b':
+                return b
+            if char == 'c':
+                return c
     else:
         print("Неверные данные")
 

@@ -8,11 +8,8 @@ def menu(point):
     :param point: Пункт меню, выбранный пользователем.
     """
     if point == 1:
-        with ThreadPoolExecutor() as executor:
-            a = executor.submit(funcs.gen_arr())
-            mas_a = a.result()
-            b = executor.submit(funcs.gen_or_get_mas)
-            mas_b = b.result()
+        mas_a = funcs.gen_or_get_mas()
+        mas_b = funcs.gen_or_get_mas()
         print("Сумма (1) или разность (2)")
         x = int(input())
         if x == 1:
@@ -34,11 +31,8 @@ def menu(point):
         else:
             print("Error")
     elif point == 3:
-        with ThreadPoolExecutor() as executor:
-            a = executor.submit(funcs.gen_or_get_mas)
-            mas_a = a.result()
-            b = executor.submit(funcs.gen_or_get_mas)
-            mas_b = b.result()
+        mas_a = funcs.gen_or_get_mas()
+        mas_b = funcs.gen_or_get_mas()
         print(funcs.how_much_same(mas_a, mas_b))
     elif point == 4:
         exit()
