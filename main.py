@@ -1,5 +1,6 @@
 import random
 
+
 def rot90(matrix):
     return [list(reversed(col)) for col in zip(*matrix)]
 
@@ -59,8 +60,8 @@ def gen_arr(lenght):
 
 def get_matrix(lenght, wight):
     a = []
-    b = []
     for i in range(lenght):
+        b = []
         for j in range(wight):
             b.append(int(input()))
         a.append(b)
@@ -69,13 +70,49 @@ def get_matrix(lenght, wight):
 
 def gen_matrix(lenght, wight):
     a = []
-    b = []
     for i in range(lenght):
+        b = []
         for j in range(wight):
             b.append(random.randint(0, 9))
         a.append(b)
     return a
 
 
+def gen_or_get_mas():
+    print("Желаете ввести массив в ручную? y/n \n В случае отказа массив будет сгенерирован случайно")
+    ch = input()
+    if ch == 'y':
+        print("Введите длинну массива")
+        lenght = int(input())
+        return get_arr(lenght)
+    elif ch == 'n':
+        print("Введите длинну массива")
+        lenght = int(input())
+        return gen_arr(lenght)
+    else:
+        print("Неверные данные")
+
+
+def gen_or_get_mat():
+    print("Желаете ввести матрицу в ручную? y/n \n В случае отказа матрица будет сгенерирована случайно")
+    ch = input()
+    if ch == 'y':
+        print("Введите длинну матрицы")
+        lenght = int(input())
+        print("Введите ширину матрицы")
+        width = int(input())
+        return get_matrix(lenght,width)
+    elif ch == 'n':
+        print("Введите длинну матрицы")
+        lenght = int(input())
+        print("Введите ширину матрицы")
+        width = int(input())
+        return gen_matrix(lenght,width)
+    else:
+        print("Неверные данные")
+
+
+
 if __name__ == "__main__":
-    print(gen_arr(3))
+    print(gen_or_get_mas())
+    print(gen_or_get_mat())
