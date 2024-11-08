@@ -1,4 +1,7 @@
 import random
+from threading import Thread
+from concurrent.futures import ThreadPoolExecutor
+
 
 def rot90(matrix):
     """
@@ -9,6 +12,7 @@ def rot90(matrix):
     """
     return [list(reversed(col)) for col in zip(*matrix)]
 
+
 def rot270(matrix):
     """
     Поворачивает матрицу на 90 градусов по часовой стрелке.
@@ -17,6 +21,7 @@ def rot270(matrix):
     :return: Повернутая матрица.
     """
     return [list(row) for row in list(zip(*matrix))[::-1]]
+
 
 def big_sum(mas_a, mas_b):
     """
@@ -35,6 +40,7 @@ def big_sum(mas_a, mas_b):
         x //= 10
     mas_x.reverse()
     return mas_x
+
 
 def big_diff(mas_a, mas_b):
     """
@@ -60,6 +66,7 @@ def big_diff(mas_a, mas_b):
         mas_x[0] = mas_x[0] * (-1)
     return mas_x
 
+
 def how_much_same(mas_a, mas_b):
     """
     Подсчитывает количество одинаковых элементов в двух массивах.
@@ -77,6 +84,7 @@ def how_much_same(mas_a, mas_b):
                 k += 1
     return k
 
+
 def get_arr(lenght):
     """
     Получает массив от пользователя.
@@ -89,6 +97,7 @@ def get_arr(lenght):
         a.append(int(input()))
     return a
 
+
 def gen_arr(lenght):
     """
     Генерирует случайный массив.
@@ -100,6 +109,7 @@ def gen_arr(lenght):
     for i in range(lenght):
         a.append(random.randint(0, 9))
     return a
+
 
 def get_matrix(lenght, wight):
     """
@@ -117,6 +127,7 @@ def get_matrix(lenght, wight):
         a.append(b)
     return a
 
+
 def gen_matrix(lenght, wight):
     """
     Генерирует случайную матрицу.
@@ -132,6 +143,7 @@ def gen_matrix(lenght, wight):
             b.append(random.randint(0, 9))
         a.append(b)
     return a
+
 
 def gen_or_get_mas():
     """
@@ -151,6 +163,7 @@ def gen_or_get_mas():
         return gen_arr(lenght)
     else:
         print("Неверные данные")
+
 
 def gen_or_get_mat():
     """
@@ -175,6 +188,7 @@ def gen_or_get_mat():
     else:
         print("Неверные данные")
 
+
 def menu(point):
     """
     Основное меню программы.
@@ -182,8 +196,11 @@ def menu(point):
     :param point: Пункт меню, выбранный пользователем.
     """
     if point == 1:
-        mas_a = gen_or_get_mas()
-        mas_b = gen_or_get_mas()
+        with ThreadPoolExecutor() as executor:
+            a = executor.submit(gen_or_get_mas, 'world!')
+            mas_a = a.result()
+            b = executor.submit(gen_or_get_mas, 'world!')
+            mas_b = b.result()
         print("Сумма (1) или разность (2)")
         x = int(input())
         if x == 1:
@@ -193,7 +210,9 @@ def menu(point):
         else:
             print("Error")
     elif point == 2:
-        mat = gen_or_get_mat()
+        with ThreadPoolExecutor() as executor:
+            a = executor.submit(gen_or_get_mas, 'world!')
+            mat = a.result()
         print("Повернуть матрицу на право (1) или на лево (2)")
         x = int(input())
         if x == 1:
@@ -203,16 +222,21 @@ def menu(point):
         else:
             print("Error")
     elif point == 3:
-        mas_a = gen_or_get_mas()
-        mas_b = gen_or_get_mas()
+        with ThreadPoolExecutor() as executor:
+            a = executor.submit(gen_or_get_mas, 'world!')
+            mas_a = a.result()
+            b = executor.submit(gen_or_get_mas, 'world!')
+            mas_b = b.result()
         print(how_much_same(mas_a, mas_b))
     elif point == 4:
         exit()
     else:
         print("Error")
 
+
 if __name__ == "__main__":
     while True:
-        print("Задачи\n 1. Входные данные: 2 массива с числами одинакового размера. Нужно произвести сумму чисел из массивов, первый массив должен быть отсортирован в порядке убывания, второй в порядке возрастания. Если числа в массивах совпадают, их сумма будет равна нулю. Конечный массив нужно отсортировать в порядке возрастания.\n2. Входные данные: матрица N на M. Требуется повернуть матрицу на 90 градусов против часовой или по часовой.\n 3. Входные данные: 2 массива с цифрами, каждый представляет собой большое число. Нужно произвести сумму или разность массивов. 4. Закончить работу программы")
+        print(
+            "Задачи\n 1. Входные данные: 2 массива с числами одинакового размера. Нужно произвести сумму чисел из массивов, первый массив должен быть отсортирован в порядке убывания, второй в порядке возрастания. Если числа в массивах совпадают, их сумма будет равна нулю. Конечный массив нужно отсортировать в порядке возрастания.\n2. Входные данные: матрица N на M. Требуется повернуть матрицу на 90 градусов против часовой или по часовой.\n 3. Входные данные: 2 массива с цифрами, каждый представляет собой большое число. Нужно произвести сумму или разность массивов. 4. Закончить работу программы")
         print("Выберите пункт меню")
-        menu(int(input()))
+        th = Thread(target=menu, args=(int(input()),))
